@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1> {{ device.name }}</h1>
+{% if error_msg %} <p><strong>{{ error_msg }}</strong></p> {% endif %}
+
+<form action="{% url 'devices_collect:detail' d_id %}" method="post">
+    {% csrf_token %}
+    {% for device in devices_list %}
+        <input type="radio" name="device" id="device{{ forloop.counter }}" value="{{ device.id }}">
+        <label for="device{{ forloop.counter }}"> {{ device.name }}</label><br>
+    {% endfor %}
+<input type="submit" value="Vote">
+</form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+{% if collect_types %}
+<form action="{% url 'devices_collect:task_info_input'%}" method="post">
+    {% csrf_token %}
+    {% for collect_type in collect_types %}
+        <input type="radio" name="collect_type" id="{{ forloop.counter }}" value="{{ collect_type.id }}">
+        <label for="{{ forloop.counter }}">{{ collect_type.name }}</label>
+    {% endfor %}
+    <input type="submit" value="提交">
+</form>
+{% endif %}
+</body>
+</html>

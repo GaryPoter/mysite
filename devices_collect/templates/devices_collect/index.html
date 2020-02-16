@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>移动设备灯塔数据管理页面</title>
+</head>
+<body>
+{% if devices_list %}
+ <ul>
+     {% for device in devices_list %}
+     <li>
+         <h1><a href="{% url 'devices_collect:detail' device.id %}" >{{ device.name }}</a></h1>
+     </li>
+     {% endfor %}
+ </ul>
+{% endif %}
+</body>
+</html>
