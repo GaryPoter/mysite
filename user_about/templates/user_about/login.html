@@ -6,5 +6,15 @@
 </head>
 <body>
 hello world!
+<form action="{% url 'user_about:do_login' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="user"/>
+    <br>
+    <input type="password" name="paswd"/>
+    <br>
+    <button type="submit" value="登录"/>
+    <br>
+    <button type="button" value="注册"/>
+</form>
 </body>
 </html>

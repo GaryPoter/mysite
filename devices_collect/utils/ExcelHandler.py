@@ -4,6 +4,7 @@ import csv
 from matplotlib import pyplot as plt
 import numpy as np
 import os
+from devices_collect.utils import app_setting
 
 plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
 plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
@@ -52,6 +53,29 @@ def analysis_manufactor(file_name, target_rate=90.0, focus_col=r'机型', task_i
     plt.title(name)
     plt.savefig('../static/pictures/%s.png' % name)
     plt.close()
+
+def mkdir(path):
+    path=path.strip()
+    is_exist = os.path.exists(path)
+    if not is_exist:
+        os.makedirs(path)
+        return True
+    else:
+        return False
+
+def handle_upload_file(f, task_name='0'):
+    """
+
+    :param f: 文件
+    :param task_name: 任务路径名
+    :return:
+    """
+    dir_path = app_setting.LANTERNS_PATH + task_name
+    mkdir(dir_path)
+    path = dir_path + '\\' + f.name
+    with open(path, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 
 if __name__ == '__main__':

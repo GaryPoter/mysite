@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表信息上传</title>
+</head>
+<body>
+<form enctype="multipart/form-data" action="{% url 'devices_collect:do_upload_file' %}" method="post">
+    {% csrf_token %}
+    <input name="file" type="file" multiple>
+    <button type="submit" value="上传">upload</button>
+</form>
+</body>
+</html>

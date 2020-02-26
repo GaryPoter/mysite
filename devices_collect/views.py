@@ -1,6 +1,7 @@
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .models import AnalysisTask, CollectType
+from .forms import UploadFileForm
 
 
 # Create your views here.
@@ -69,3 +70,18 @@ def analysis_task_info(request):
 '''
 def analysis_task_submit_res(requset):
     pass
+
+'''
+上传文件
+'''
+def do_upload_file(request):
+    if request.method == 'POST':
+        files = request.FILES.getlist('file', None)
+        for file in files:
+            from devices_collect.utils.ExcelHandler import handle_upload_file
+            handle_upload_file(file, '0')
+            # return HttpResponseRedirect('devices_collect/index.html')
+    return HttpResponse('上传成功')
+
+def upload_file(request):
+    return render(request, 'devices_collect/upload_file.html', {})
